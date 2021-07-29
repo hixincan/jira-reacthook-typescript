@@ -5,11 +5,11 @@ import qs from "qs";
 import { cleanObject } from "../../util";
 import { useMountHook } from "../../hooks/useMountHook";
 import { useDebounceHook } from "../../hooks/useDebounceHook";
+import { useHttpHook } from "../../util/http";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const ProjectList = () => {
-  console.log("ProjectList");
   const [users, setUsers] = useState([]);
   const [param, setParam] = useState({
     name: "",
@@ -18,26 +18,29 @@ export const ProjectList = () => {
 
   const debouncedParam = useDebounceHook(param, 500);
   const [list, setList] = useState([]);
+  const http = useHttpHook();
 
   // 当param变化时，请求数据
   useEffect(() => {
-    fetch(
+    http("projects", { data: cleanObject(debouncedParam) }).then(setList);
+    /*fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`
     ).then(async (res) => {
       if (res.ok) {
         // 把数据保存下来
         setList(await res.json());
       }
-    });
+    });*/
   }, [debouncedParam]);
 
   useMountHook(() => {
-    fetch(`${apiUrl}/users`).then(async (res) => {
+    http("users").then(setUsers);
+    /*fetch(`${apiUrl}/users`).then(async (res) => {
       if (res.ok) {
         // 把数据保存下来
         setUsers(await res.json());
       }
-    });
+    });*/
   });
 
   return (

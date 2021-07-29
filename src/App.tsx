@@ -1,28 +1,14 @@
 import React from "react";
-// import logo from './logo.svg';
 import "./App.css";
-// import { ProjectList } from "pages/project-list";
-import { Login } from "./pages/login";
+import { useAuthHook } from "./context/auth-context";
+import { AuthenticatedApp } from "./authenticated-app";
+import { UnappenticatedApp } from "./unauthenticated-app";
 
 function App() {
+  const { user } = useAuthHook();
   return (
     <div className="App">
-      {/*<ProjectList />*/}
-      <Login />
-      {/*<header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App2.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>*/}
+      {user ? <AuthenticatedApp /> : <UnappenticatedApp />}
     </div>
   );
 }

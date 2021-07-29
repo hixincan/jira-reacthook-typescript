@@ -1,9 +1,9 @@
 import { FormEvent } from "react";
-import { useAuthHook } from "../../context/auth-context";
+import { useAuthHook } from "../context/auth-context";
 
-export const Login = () => {
+export const Register = () => {
   // 可以全局读取 user 信息，和这些auth方法
-  const { login, user } = useAuthHook();
+  const { register, user } = useAuthHook();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -11,12 +11,11 @@ export const Login = () => {
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
+    register({ username, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {user ? <div>登录成功，用户名: {user?.name}</div> : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"} />
@@ -25,7 +24,7 @@ export const Login = () => {
         <label htmlFor="password">密码</label>
         <input type="password" id={"password"} />
       </div>
-      <button type={"submit"}>登录</button>
+      <button type={"submit"}>注册</button>
     </form>
   );
 };

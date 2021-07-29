@@ -1,12 +1,14 @@
 import React from "react";
 // import logo from './logo.svg';
 import "./App.css";
-import { ProjectList } from "pages/project-list";
+// import { ProjectList } from "pages/project-list";
+import { Login } from "./pages/login";
 
 function App() {
   return (
     <div className="App">
-      <ProjectList />
+      {/*<ProjectList />*/}
+      <Login />
       {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -1,20 +1,9 @@
 import { FormEvent } from "react";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { useAuthHook } from "../../context/auth-context";
 
 export const Login = () => {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (res) => {
-      if (res.ok) {
-      }
-    });
-  };
+  // 可以全局读取 user 信息，和这些auth方法
+  const { login, user } = useAuthHook();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +16,7 @@ export const Login = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {user ? <div>登录成功，用户名: {user?.name}</div> : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"} />

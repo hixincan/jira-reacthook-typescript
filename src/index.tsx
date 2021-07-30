@@ -4,6 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadDevTools } from "jira-dev-tool";
+// 上面的 jira-dev-tool 也用到了antd
+// 在其后引入是为了能覆盖 jira-dev-tool 内的样式
+// 引用 less 是为了自定义主题
+import "antd/dist/antd.less";
 import { AppProviders } from "./context";
 
 loadDevTools(() => {

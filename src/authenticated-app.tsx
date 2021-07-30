@@ -1,22 +1,34 @@
 import { ProjectList } from "./pages/project-list";
 import { useAuthHook } from "./context/auth-context";
-import { Button } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
 import { Row } from "./components/lib";
 
+import { ReactComponent as Logo } from "assets/jira-software-logo.svg";
+
 export const AuthenticatedApp = () => {
-  const { logout } = useAuthHook();
+  const { logout, user } = useAuthHook();
 
   return (
     <Container>
       <Header between={true}>
         <HeaderLeft gap={true}>
-          <h2>Logo</h2>
+          <Logo width={"18rem"} color={"rgb(38, 132, 255)"} />
           <h2>项目</h2>
           <h2>用户</h2>
         </HeaderLeft>
         <HeaderRight>
-          <Button onClick={logout}>登出</Button>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key={"logout"}>
+                  <a onClick={logout}>登出</a>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <a onClick={(e) => e.preventDefault()}>Hi, {user?.name}</a>
+          </Dropdown>
         </HeaderRight>
       </Header>
       <Main>
@@ -32,8 +44,9 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Header = styled(Row)``;
+const Header = styled(Row)`
+  padding: 3.2rem;
+`;
 const Main = styled.main``;
-
 const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;

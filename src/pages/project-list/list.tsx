@@ -21,7 +21,7 @@ export const List = ({ list, users }: ListProps) => {
     <Table
       pagination={false}
       dataSource={list}
-      key={"id"}
+      rowKey={"id"}
       columns={[
         {
           title: "名称",

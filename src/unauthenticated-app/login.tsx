@@ -1,11 +1,10 @@
-import { FormEvent } from "react";
 import { useAuthHook } from "../context/auth-context";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { LongButton } from "./index";
 
 export const Login = () => {
   // 可以全局读取 user 信息，和这些auth方法
-  const { login, user } = useAuthHook();
+  const { login } = useAuthHook();
 
   /*const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

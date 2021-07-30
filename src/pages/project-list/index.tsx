@@ -1,14 +1,11 @@
 import { SearchPanel } from "./search-panel";
 import { List } from "./list";
 import { useEffect, useState } from "react";
-import qs from "qs";
 import { cleanObject } from "../../util";
 import { useMountHook } from "../../hooks/useMountHook";
 import { useDebounceHook } from "../../hooks/useDebounceHook";
 import { useHttpHook } from "../../util/http";
 import styled from "@emotion/styled";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export const ProjectList = () => {
   const [users, setUsers] = useState([]);
@@ -32,6 +29,7 @@ export const ProjectList = () => {
         setList(await res.json());
       }
     });*/
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParam]);
 
   useMountHook(() => {

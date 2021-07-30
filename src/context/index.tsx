@@ -1,7 +1,7 @@
 // 项目根节点
 import { ReactNode } from "react";
 import { AuthProvider } from "./auth-context";
-
+import { QueryClient, QueryClientProvider } from "react-query";
 /*
   形式1
   <div>
@@ -20,5 +20,9 @@ import { AuthProvider } from "./auth-context";
 
 */
 export const AppProviders = ({ children }: { children: ReactNode }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <QueryClientProvider client={new QueryClient()}>
+      <AuthProvider>{children}</AuthProvider>;
+    </QueryClientProvider>
+  );
 };

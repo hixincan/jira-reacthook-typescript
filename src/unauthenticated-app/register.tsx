@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import { useAuthHook } from "../context/auth-context";
 import { Button, Form, Input } from "antd";
+import { LongButton } from "./index";
 
 export const Register = () => {
   // 可以全局读取 user 信息，和这些auth方法
@@ -34,9 +35,9 @@ export const Register = () => {
         <Input type="password" placeholder={"输入密码"} />
       </Form.Item>
       <Form.Item>
-        <Button type={"primary"} htmlType={"submit"}>
+        <LongButton type={"primary"} htmlType={"submit"}>
           注册
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   );

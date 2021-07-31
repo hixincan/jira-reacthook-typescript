@@ -3,10 +3,10 @@ import { Table } from "antd";
 import dayjs from "dayjs";
 import { TableProps } from "antd/es";
 
-interface Project {
+export interface Project {
   id: number;
   name: string;
-  personId: number;
+  personId: number | string;
   pin: boolean;
   organization: string;
   created: number;

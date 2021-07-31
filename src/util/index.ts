@@ -15,3 +15,7 @@ export const cleanObject = (obj: { [key: string]: unknown } = {}) => {
   });
   return result;
 };
+
+export const resetRoute = () => {
+  window.location.href = window.location.origin;
+};

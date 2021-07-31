@@ -8,6 +8,7 @@ import { ReactComponent as Logo } from "assets/jira-software-logo.svg";
 import { Navigate, Routes, Route } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Project } from "./pages/project";
+import { resetRoute } from "./util";
 
 export const AuthenticatedApp = () => {
   return (
@@ -21,6 +22,8 @@ export const AuthenticatedApp = () => {
               path={"/projects/:projectId/*"}
               element={<Project />}
             ></Route>
+            {/*当上述路由不匹配时，跳转到默认规则*/}
+            <Navigate to={"/projects"}></Navigate>
           </Routes>
         </Router>
       </Main>
@@ -33,7 +36,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
+        {/*<Button type={'link'} onClick={resetRoute}>*/}
         <Logo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        {/*</Button>*/}
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>

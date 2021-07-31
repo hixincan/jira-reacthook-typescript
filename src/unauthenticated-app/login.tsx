@@ -1,10 +1,13 @@
 import { useAuthHook } from "../context/auth-context";
 import { Form, Input } from "antd";
 import { LongButton } from "./index";
+import { useAsyncHook } from "../hooks/useAsyncHook";
+import { on } from "cluster";
 
-export const Login = () => {
+export const Login = ({ onError }: { onError: (error: Error) => void }) => {
   // 可以全局读取 user 信息，和这些auth方法
   const { login } = useAuthHook();
+  const { run, isLoading } = useAsyncHook(undefined, { throwOnError: true });
 
   /*const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,8 +18,18 @@ export const Login = () => {
     login({ username, password });
   };*/
 
-  const handleSubmit = (values: { username: string; password: string }) => {
-    login(values);
+  const handleSubmit = async (values: {
+    username: string;
+    password: string;
+  }) => {
+    // run(login(values).catch(onError));//这里的catch先执行，run内的catch就没有机会执行了
+    // 换种 try-catch 写法
+
+    try {
+      await run(login(values));
+    } catch (err) {
+      onError(err);
+    }
   };
 
   return (
@@ -34,7 +47,7 @@ export const Login = () => {
         <Input type="password" placeholder={"输入密码"} />
       </Form.Item>
       <Form.Item>
-        <LongButton type={"primary"} htmlType={"submit"}>
+        <LongButton loading={isLoading} type={"primary"} htmlType={"submit"}>
           登录
         </LongButton>
       </Form.Item>

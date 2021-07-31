@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Register } from "./register";
 import { Login } from "./login";
-import { Button, Card, Divider } from "antd";
+import { Button, Card, Divider, Typography } from "antd";
 import styled from "@emotion/styled";
 
 export const UnappenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   const handleClick = () => {
     setIsRegister(!isRegister);
@@ -15,7 +16,14 @@ export const UnappenticatedApp = () => {
     <Container>
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
-        {isRegister ? <Register /> : <Login />}
+        {error ? (
+          <Typography.Text type={"danger"}>{error.message}</Typography.Text>
+        ) : null}
+        {isRegister ? (
+          <Register onError={setError} />
+        ) : (
+          <Login onError={setError} />
+        )}
         <Divider />
         <Button type={"link"} onClick={handleClick}>
           {isRegister ? "已经有账号了？直接登录" : "没有账号？注册新账号"}

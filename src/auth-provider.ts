@@ -24,7 +24,7 @@ export const login = (data: { username: string; password: string }) => {
     if (res.ok) {
       return handleUserResponse(await res.json());
     } else {
-      return Promise.reject(data); // 相当于 throw new Error，没有这个 else 就可能返回 undefined，不符合 ts 类型检查
+      return Promise.reject(await res.json()); // 相当于 throw new Error，没有这个 else 就可能返回 undefined，不符合 ts 类型检查
     }
   });
 };
@@ -40,7 +40,7 @@ export const register = (data: { username: string; password: string }) => {
     if (res.ok) {
       return handleUserResponse(await res.json());
     } else {
-      return Promise.reject(data); // 相当于 throw new Error，没有这个 else 就可能返回 undefined，不符合 ts 类型检查
+      return Promise.reject(await res.json()); // 相当于 throw new Error，没有这个 else 就可能返回 undefined，不符合 ts 类型检查
     }
   });
 };

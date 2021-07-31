@@ -10,8 +10,11 @@ import { Typography } from "antd";
 // import {useAsyncHook} from "../../hooks/useAsyncHook";
 import { useProjectsHook } from "../../hooks/useProjectsHook";
 import { useUserHook } from "../../hooks/useUserHook";
+import { useDocumentTitleHook } from "../../hooks/useDocumentTitleHook";
 
 export const ProjectList = () => {
+  useDocumentTitleHook("任务列表");
+
   // const [users, setUsers] = useState([]);
   const [param, setParam] = useState({
     name: "",

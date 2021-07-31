@@ -2,8 +2,11 @@ import { useAuthHook } from "../context/auth-context";
 import { Form, Input } from "antd";
 import { LongButton } from "./index";
 import { useAsyncHook } from "../hooks/useAsyncHook";
+import { useDocumentTitleHook } from "../hooks/useDocumentTitleHook";
 
 export const Register = ({ onError }: { onError: (error: Error) => void }) => {
+  useDocumentTitleHook("注册");
+
   // 可以全局读取 user 信息，和这些auth方法
   const { register } = useAuthHook();
   const { run, isLoading } = useAsyncHook(undefined, { throwOnError: true });

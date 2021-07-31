@@ -2,9 +2,11 @@ import { useAuthHook } from "../context/auth-context";
 import { Form, Input } from "antd";
 import { LongButton } from "./index";
 import { useAsyncHook } from "../hooks/useAsyncHook";
-import { on } from "cluster";
+import { useDocumentTitleHook } from "../hooks/useDocumentTitleHook";
 
 export const Login = ({ onError }: { onError: (error: Error) => void }) => {
+  useDocumentTitleHook("登录");
+
   // 可以全局读取 user 信息，和这些auth方法
   const { login } = useAuthHook();
   const { run, isLoading } = useAsyncHook(undefined, { throwOnError: true });

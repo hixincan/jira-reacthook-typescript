@@ -8,9 +8,10 @@ import { ReactComponent as Logo } from "assets/jira-software-logo.svg";
 
 export const AuthenticatedApp = () => {
   const { logout, user } = useAuthHook();
-
+  // const value:any = undefined
   return (
     <Container>
+      {/*{value.notExist}*/}
       <Header between={true}>
         <HeaderLeft gap={true}>
           <Logo width={"18rem"} color={"rgb(38, 132, 255)"} />

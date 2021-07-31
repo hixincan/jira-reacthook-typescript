@@ -2,11 +2,12 @@ import { User } from "./search-panel";
 import { Table } from "antd";
 import dayjs from "dayjs";
 import { TableProps } from "antd/es";
+import { Link } from "react-router-dom";
 
 export interface Project {
-  id: number;
+  id: string;
   name: string;
-  personId: number | string;
+  personId: string;
   pin: boolean;
   organization: string;
   created: number;
@@ -22,8 +23,10 @@ export const List = ({ users, ...props }: ListProps) => {
       columns={[
         {
           title: "名称",
-          dataIndex: "name",
           sorter: (a, b) => a.name.localeCompare(b.name),
+          render: (value, project) => {
+            return <Link to={"" + project.id}>{project.name}</Link>;
+          },
         },
         {
           title: "部门",
@@ -32,9 +35,9 @@ export const List = ({ users, ...props }: ListProps) => {
         {
           title: "负责人",
           dataIndex: "personId",
-          render: (text, record) => {
+          render: (text, project) => {
             return (
-              users.find((user) => user.id === record.personId)?.name || "未知"
+              users.find((user) => user.id === project.personId)?.name || "未知"
             );
           },
         },

@@ -6,6 +6,7 @@ import { useMountHook } from "../hooks/useMountHook";
 import { useAsyncHook } from "../hooks/useAsyncHook";
 import { FullPageErrorFallback, FullPageLoading } from "../components/lib";
 
+// 组件共享信息
 // 给一个 undefined 会让 ts 认为就只能接收 undefined 类型，其实这知识初始值，
 // 所以要显示声明类型，不要让 ts 主动推断类型
 const AuthContext = React.createContext<

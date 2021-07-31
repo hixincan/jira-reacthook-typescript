@@ -3,7 +3,7 @@ import { Form, Input, Select } from "antd";
 
 // 将 User 声明复用
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
   title: string;

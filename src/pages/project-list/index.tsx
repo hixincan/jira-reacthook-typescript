@@ -11,15 +11,18 @@ import { Typography } from "antd";
 import { useProjectsHook } from "../../hooks/useProjectsHook";
 import { useUserHook } from "../../hooks/useUserHook";
 import { useDocumentTitleHook } from "../../hooks/useDocumentTitleHook";
+import { useUrlQueryParam } from "../../util/url";
 
 export const ProjectList = () => {
   useDocumentTitleHook("任务列表");
 
   // const [users, setUsers] = useState([]);
-  const [param, setParam] = useState({
+  /*const [, setParam] = useState({
     name: "",
     personId: "",
-  });
+  });*/
+  // 注：传入的参数是普通对象，重新渲染时会重新定义，这种对象不能用来作为依赖项
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
 
   const debouncedParam = useDebounceHook(param, 500);
 
@@ -91,6 +94,8 @@ export const ProjectList = () => {
     </Container>
   );
 };
+
+// ProjectList.whyDidYouRender = true;
 
 const Container = styled.div`
   padding: 3.2rem;

@@ -29,12 +29,13 @@ export const SearchPanel = ({ param, setParam, users }: SearchPanelProps) => {
           placeholder={"项目名"}
           type="text"
           value={param.name}
-          onChange={(evt) =>
+          onChange={(evt) => {
+            console.log(evt.target.value);
             setParam({
               ...param,
               name: evt.target.value,
-            })
-          }
+            });
+          }}
         />
       </Form.Item>
       <Form.Item>
@@ -49,7 +50,7 @@ export const SearchPanel = ({ param, setParam, users }: SearchPanelProps) => {
         >
           <Select.Option value={""}>负责人</Select.Option>
           {users.map((user) => (
-            <Select.Option key={user.id} value={user.id}>
+            <Select.Option key={user.id} value={user.id + ""}>
               {user.name}
             </Select.Option>
           ))}
